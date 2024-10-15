@@ -17,7 +17,7 @@ import { Loader2 } from "lucide-react";
 
 const OTP_LENGTH = 6;
 
-export default function OTPPage() {
+function OTP() {
   const [otp, setOtp] = useState(Array(OTP_LENGTH).fill(""));
   const [isVerifying, setIsVerifying] = useState(false);
   const [isResending, setIsResending] = useState(false);
@@ -182,5 +182,13 @@ export default function OTPPage() {
         </Card>
       </Suspense>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <OTP />
+    </Suspense>
   );
 }
