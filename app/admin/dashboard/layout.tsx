@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-background border-b">
-        <div className="container flex items-center justify-between h-16">
+        <div className="container mx-auto flex items-center justify-between h-16">
           <Link href="/" className="text-2xl font-bold">
             SaaS Product Manager
           </Link>
@@ -75,9 +75,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link
-                    href="/admin/create-product"
+                    href="/admin/dashboard/product/add"
                     className={
-                      isActive("/admin/create-product") ? "bg-accent" : ""
+                      isActive("/admin/dashboard/product/add")
+                        ? "bg-accent"
+                        : ""
                     }
                   >
                     Create Product
@@ -124,14 +126,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </nav>
         </div>
       </header>
-      <main className="flex-1 container py-6">{children}</main>
-      <footer className="bg-background border-t">
-        <div className="container flex items-center justify-center h-16">
-          <p className="text-sm text-muted-foreground">
-            © 2023 SaaS Product Manager. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <div className="flex-1 container py-6">{children}</div>
     </div>
   );
 }
