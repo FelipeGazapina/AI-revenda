@@ -16,14 +16,12 @@ import {
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Implement login logic here
-    console.log("Login with", email, password);
-    router.push("/dashboard");
+    router.push(`/otp?email=${email}`);
   };
 
   return (
@@ -48,22 +46,12 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
             </div>
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button type="submit" onClick={handleLogin}>
-            Login
+            Enter
           </Button>
         </CardFooter>
       </Card>

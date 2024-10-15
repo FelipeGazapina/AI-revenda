@@ -42,8 +42,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link
-                    href="/admin/dashboard"
-                    className={isActive("/admin/dashboard") ? "bg-accent" : ""}
+                    href="/admin"
+                    className={isActive("/admin") ? "bg-accent" : ""}
                   >
                     Admin Dashboard
                   </Link>
@@ -59,27 +59,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <DropdownMenuContent>
                 <DropdownMenuItem asChild>
                   <Link
-                    href="/products"
-                    className={isActive("/products") ? "bg-accent" : ""}
+                    href="/admin/product"
+                    className={isActive("/admin/product") ? "bg-accent" : ""}
                   >
-                    Browse Products
+                    Products list
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link
-                    href="/admin/products"
-                    className={isActive("/admin/products") ? "bg-accent" : ""}
-                  >
-                    Manage Products
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link
-                    href="/admin/dashboard/product/add"
+                    href="/admin/product/add"
                     className={
-                      isActive("/admin/dashboard/product/add")
-                        ? "bg-accent"
-                        : ""
+                      isActive("/admin/product/add") ? "bg-accent" : ""
                     }
                   >
                     Create Product
@@ -114,14 +104,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link href="/cart">
-              <Button
-                variant="ghost"
-                className={isActive("/cart") ? "bg-accent" : ""}
-              >
-                Cart
-              </Button>
-            </Link>
             <UserButton />
           </nav>
         </div>
