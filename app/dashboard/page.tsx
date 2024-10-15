@@ -58,7 +58,7 @@ const favoriteProducts = [
   },
 ];
 
-const ProductCard = ({ product, isFavorite = false }) => (
+const ProductCard = ({ product, isFavorite = false }: any) => (
   <Card className="w-full">
     <CardHeader>
       <img
@@ -86,7 +86,7 @@ const ProductCard = ({ product, isFavorite = false }) => (
   </Card>
 );
 
-const Carousel = ({ items }) => {
+const Carousel = ({ items }: any) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -106,7 +106,7 @@ const Carousel = ({ items }) => {
           className="flex transition-transform duration-300 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {items.map((item) => (
+          {items.map((item: any) => (
             <div key={item.id} className="w-full flex-shrink-0">
               <ProductCard product={item} />
             </div>

@@ -44,42 +44,51 @@ const formSchema = z.object({
   name: z
     .string()
     .min(2, { message: "Product name must be at least 2 characters." }),
+
   description: z
     .string()
     .min(10, { message: "Description must be at least 10 characters." }),
-  price: z.string().refine((val) => !isNaN(Number(val)), {
-    message: "Price must be a valid number.",
+
+  price: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+    message: "Price must be a valid number and greater than 0.",
   }),
-  discount: z.number().min(0).max(100),
+
+  discount: z
+    .number()
+    .min(0, { message: "Discount must be at least 0." })
+    .max(100, { message: "Discount must not exceed 100." }),
+
   sizes: z.array(z.string()).min(1, { message: "Select at least one size." }),
+
   colors: z.array(z.string()).min(1, { message: "Select at least one color." }),
+
   mainImage: z
-    .any()
-    .refine((files) => files?.length == 1, "Main image is required.")
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max file size is 5MB.`
-    )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."
-    ),
+    .custom<FileList>()
+    .refine((files) => files?.length === 1, {
+      message: "Main image is required.",
+    })
+    .refine((files) => files[0]?.size <= MAX_FILE_SIZE, {
+      message: `Max file size is 5MB.`,
+    })
+    .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files[0]?.type), {
+      message: "Only .jpg, .jpeg, .png, and .webp formats are supported.",
+    }),
+
   galleryImages: z
-    .any()
-    .refine(
-      (files) => files?.length <= 5,
-      "You can upload up to 5 gallery images."
-    )
+    .custom<FileList>()
+    .refine((files) => files.length <= 5, {
+      message: "You can upload up to 5 gallery images.",
+    })
     .refine(
       (files) => Array.from(files).every((file) => file.size <= MAX_FILE_SIZE),
-      `Max file size is 5MB.`
+      { message: `Max file size is 5MB.` }
     )
     .refine(
       (files) =>
         Array.from(files).every((file) =>
           ACCEPTED_IMAGE_TYPES.includes(file.type)
         ),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."
+      { message: "Only .jpg, .jpeg, .png, and .webp formats are supported." }
     ),
 });
 

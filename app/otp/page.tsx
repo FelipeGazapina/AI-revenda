@@ -144,7 +144,9 @@ export default function OTPPage() {
                   value={digit}
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
-                  ref={(el) => (inputRefs.current[index] = el)}
+                  ref={(el) => {
+                    inputRefs.current[index] = el;
+                  }}
                   className="w-12 h-12 text-center text-2xl"
                   disabled={isVerifying || isResending}
                 />
